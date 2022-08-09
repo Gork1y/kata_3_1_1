@@ -36,15 +36,15 @@ public class UserController {
     }
 
     @GetMapping("/{id}/edit")
-    public String editUser(ModelMap model, @PathVariable("id") Long id) {
-        model.addAttribute("user", userService.getById(id));
+    public String editUser( @PathVariable("id") Long id, ModelMap model) {
+        User user = userService.getById(id);
+        model.addAttribute("user", user );
         return "editUser";
     }
 
-    @PatchMapping("/{id}")
-    public String updateUser(@ModelAttribute("user") User user, @PathVariable("id") Long id) {
-    userService.add(user);
+    @PostMapping("/edit")
+    public String updateUser(User user) {
+        userService.add(user);
         return "redirect:/";
     }
-
 }
